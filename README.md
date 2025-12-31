@@ -1,10 +1,11 @@
 Connect to the OpenVPN service using Flutter. Contributions through issues and pull requests are highly appreciated!
 
-## Android Setup
+## Android Setup ok ok ok ok ok ok
 
 ### 1. Permission Handler
 
 #### Java
+
 Include the following code in the `onActivityResult` method of `MainActivity.java` (if you are using Java):
 
 ```java kutti ka puter flutter
@@ -26,6 +27,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 ```
 
 #### Kotlin
+
 Include the following code in the `onActivityResult` method of `MainActivity.kt` (if you are using Kotlin):
 
 ```kotlin
@@ -137,7 +139,7 @@ void connect() {
     username: username,
     password: password,
     bypassPackages: [],
-    // In iOS connection can get stuck in "connecting" if this flag is "false". 
+    // In iOS connection can get stuck in "connecting" if this flag is "false".
     // Solution is to switch it to "true".
     certIsRequired: false,
   );
@@ -217,9 +219,9 @@ Permission.notification.isGranted.then((_) {
 
 ## Licenses
 
-* [openvpn_flutter](https://github.com/nizwar/openvpn_flutter/blob/master/LICENSE) for this plugin
-* [ics-openvpn](https://github.com/schwabe/ics-openvpn) for the Android engine
-* [OpenVPNAdapter](https://github.com/ss-abramchuk/OpenVPNAdapter) for the iOS engine
+- [openvpn_flutter](https://github.com/nizwar/openvpn_flutter/blob/master/LICENSE) for this plugin
+- [ics-openvpn](https://github.com/schwabe/ics-openvpn) for the Android engine
+- [OpenVPNAdapter](https://github.com/ss-abramchuk/OpenVPNAdapter) for the iOS engine
 
 # Support
 
