@@ -8,11 +8,9 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.3.0'
     }
 }
-
-// YE REMOVE KARO - rootProject.allprojects aur allprojects dono
 
 apply plugin: 'com.android.library'
 
@@ -28,8 +26,13 @@ android {
     defaultConfig {
         minSdkVersion 16
     }
-}
 
-dependencies {
-    implementation project(':openvpn_library_16kb')
+    // YE ADD KARO
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', '../openvpn_library_16kb/src/main/java']
+            res.srcDirs = ['src/main/res', '../openvpn_library_16kb/src/main/res']
+            manifest.srcFile '../openvpn_library_16kb/src/main/AndroidManifest.xml'
+        }
+    }
 }
