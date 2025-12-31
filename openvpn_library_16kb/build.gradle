@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
+    namespace 'de.blinkt.openvpn'  // set the namespace here
     compileSdkVersion 34
 
     defaultConfig {
