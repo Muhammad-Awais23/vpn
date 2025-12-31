@@ -7,28 +7,12 @@ buildscript {
         mavenCentral()
         maven { url 'https://jitpack.io' }
     }
-
     dependencies {
         classpath 'com.android.tools.build:gradle:7.4.2'
     }
 }
 
-rootProject.allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url 'https://jitpack.io' }
-    }
-}
-
-
-allprojects {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        maven { url "https://jitpack.io" }
-    }
-}
+// YE REMOVE KARO - rootProject.allprojects aur allprojects dono
 
 apply plugin: 'com.android.library'
 
