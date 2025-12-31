@@ -1082,13 +1082,13 @@ private void showTimeLimitReachedNotification() {
         }
     }
 
-   @Override
+    @Override
     public void onDestroy() {
         Log.d(TAG, "onDestroy called");
-        
+
         // Stop timer monitoring first
         stopTimerMonitoring();
-        
+
         // Quit timer thread
         if (timerThread != null) {
             timerThread.quitSafely();
@@ -1107,24 +1107,15 @@ private void showTimeLimitReachedNotification() {
                 this.unregisterReceiver(mDeviceStateReceiver);
             }
         } catch (IllegalArgumentException ignored) {
+            // I don't know why this happens:
+            // java.lang.IllegalArgumentException: Receiver not registered
+            // Ignore for now...
         }
-        
-        VpnStatus.removeStateListener(this);
-        VpnStatus.flushLog();
-    }
-    try {
-            if (mDeviceStateReceiver != null) {
-                this.unregisterReceiver(mDeviceStateReceiver);
-            }
-        } catch (IllegalArgumentException ignored) {
-            // I don't know why  this happens:
-            // java.lang.IllegalArgumentException: Receiver not registered: de.blinkt.openvpn.NetworkSateReceiver@41a61a10
-            // Ignore for now ...
-        }
+
         // Just in case unregister for state
         VpnStatus.removeStateListener(this);
         VpnStatus.flushLog();
-    }
+    } // ✅ ADD THIS CLOSING BRACE
 
     private String getTunConfigString() {
         // The format of the string is not important, only that
