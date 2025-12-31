@@ -1,3 +1,0 @@
-rootProject.name = 'openvpn_flutter'
-include ':openvpn_library_16kb'
-project(':openvpn_library_16kb').projectDir = new File('../openvpn_library_16kb')
