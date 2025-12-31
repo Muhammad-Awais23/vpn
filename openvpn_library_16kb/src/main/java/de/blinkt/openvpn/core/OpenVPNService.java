@@ -4,9 +4,11 @@
  */
 
 package de.blinkt.openvpn.core;
-import android.content.SharedPreferences;
-import android.os.HandlerThread;
-import android.os.Process;
+
+import static de.blinkt.openvpn.core.ConnectionStatus.LEVEL_CONNECTED;
+import static de.blinkt.openvpn.core.ConnectionStatus.LEVEL_WAITING_FOR_USER_INPUT;
+import static de.blinkt.openvpn.core.NetworkSpace.IpAddress;
+import id.laskarmedia.openvpn_flutter.R;
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -20,6 +22,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ShortcutManager;
@@ -33,9 +36,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
+import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.ParcelFileDescriptor;
+import android.os.Process;
 import android.os.RemoteException;
 import android.system.OsConstants;
 import android.text.TextUtils;
@@ -64,16 +69,11 @@ import java.util.Vector;
 
 import de.blinkt.openvpn.DisconnectVPNActivity;
 import de.blinkt.openvpn.LaunchVPN;
-import de.blinkt.openvpn.R;
 import de.blinkt.openvpn.VpnProfile;
 import de.blinkt.openvpn.api.ExternalAppDatabase;
 import de.blinkt.openvpn.core.VpnStatus.ByteCountListener;
 import de.blinkt.openvpn.core.VpnStatus.StateListener;
 import de.blinkt.openvpn.utils.TotalTraffic;
-
-import static de.blinkt.openvpn.core.ConnectionStatus.LEVEL_CONNECTED;
-import static de.blinkt.openvpn.core.ConnectionStatus.LEVEL_WAITING_FOR_USER_INPUT;
-import static de.blinkt.openvpn.core.NetworkSpace.IpAddress;
 
 public class OpenVPNService extends VpnService implements StateListener, Callback, ByteCountListener, IOpenVPNServiceInternal {
 
@@ -855,7 +855,7 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
     }
 
     private HandlerThread timerThread;
-    private Handler timerHandler;
+
 
     @Override
     public void onCreate() {
@@ -1098,7 +1098,9 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
 
         // Quit timer thread
         if (timerThread != null) {
-            timerThread.quitSafely();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                timerThread.quitSafely();
+            }
             timerThread = null;
         }
 

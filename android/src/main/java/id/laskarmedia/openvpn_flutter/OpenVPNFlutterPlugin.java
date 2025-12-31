@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.VpnService;
 import android.util.Log;
-
+import android.os.Build;  // ✅ ADD THIS
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -18,6 +18,7 @@ import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import io.flutter.plugin.common.EventChannel;
+
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.PluginRegistry;
 

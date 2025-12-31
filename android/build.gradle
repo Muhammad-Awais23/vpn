@@ -16,18 +16,17 @@ apply plugin: 'com.android.library'
 
 android {
     namespace = 'id.laskarmedia.openvpn_flutter'
-    compileSdkVersion 34
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+    compileSdk = 34
 
     defaultConfig {
-        minSdkVersion 16
+        minSdk = 16
     }
 
-    // YE ADD KARO
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
     sourceSets {
         main {
             java.srcDirs = ['src/main/java', '../openvpn_library_16kb/src/main/java']
@@ -35,4 +34,15 @@ android {
             manifest.srcFile '../openvpn_library_16kb/src/main/AndroidManifest.xml'
         }
     }
+}
+
+repositories {
+    google()
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'androidx.annotation:annotation:1.9.1'
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
 }
