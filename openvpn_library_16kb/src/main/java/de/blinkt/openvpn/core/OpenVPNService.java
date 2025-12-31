@@ -1112,15 +1112,7 @@ private void showTimeLimitReachedNotification() {
         VpnStatus.removeStateListener(this);
         VpnStatus.flushLog();
     }
-
-          
-        synchronized (mProcessLock) {
-            if (mProcessThread != null) {
-                mManagement.stopVPN(true);
-            }
-        }
-
-        try {
+    try {
             if (mDeviceStateReceiver != null) {
                 this.unregisterReceiver(mDeviceStateReceiver);
             }
